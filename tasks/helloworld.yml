@@ -1,0 +1,32 @@
+---
+- name: Manage file creation, content, and permissions
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create an empty file if it does not exist
+      ansible.builtin.file:
+        path: /home/mina-unal/my-ansible-case-2-repository/myplaybook/tasks/deneme.txt
+        state: touch
+
+    - name: Add Hello World content to the file
+      ansible.builtin.copy:
+        dest: /home/mina-unal/my-ansible-case-2-repository/myplaybook/tasks/deneme.txt
+        content: "Hello, World!\n"
+        mode: '0644'
+
+    - name: Update the file content
+      ansible.builtin.copy:
+        dest: /home/mina-unal/my-ansible-case-2-repository/myplaybook/tasks/deneme.txt
+        content: "Today is 30th of the July\n"
+
+    - name: Change permissions of the file to 0755
+      ansible.builtin.file:
+        path: /home/mina-unal/my-ansible-case-2-repository/myplaybook/tasks/deneme.txt
+        mode: '0755'
+
+    - name: Copy deneme.txt to backup directory
+      ansible.builtin.copy:
+        src: /home/mina-unal/my-ansible-case-2-repository/myplaybook/tasks/deneme.txt
+        dest: /home/mina-unal/my-ansible-case-2-repository/myplaybook/files
+
+
